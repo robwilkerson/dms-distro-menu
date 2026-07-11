@@ -5,6 +5,13 @@ widget that shows the **distro logo** far-left on the bar and, on click, opens a
 dropdown modeled after the macOS **Apple menu** — a single anchored entry point
 for system-level actions.
 
+![The Distro Menu dropdown open on the bar](docs/screenshot.png)
+
+## Prerequisites
+
+- **DankMaterialShell `>= 1.4.0`** — the shell that loads this plugin.
+- **The `dgop` binary** (ships with DMS) — powers the About facts.
+
 ## Bar
 
 The distro logo, auto-detected from `/etc/os-release` via DMS's shared
@@ -37,19 +44,32 @@ dropdown reflects them live.
 ## Install
 
 DMS loads plugins from `~/.config/DankMaterialShell/plugins/`. Either clone this
-repo directly into that directory, or clone it anywhere and symlink it in:
+repo directly into that directory:
 
 ```sh
 git clone git@github.com:robwilkerson/dms-distro-menu.git \
-  ~/Development/lookout-software/dms-distro-menu
-ln -s ~/Development/lookout-software/dms-distro-menu \
+  ~/.config/DankMaterialShell/plugins/distroMenu
+```
+
+or clone it anywhere and symlink it in:
+
+```sh
+git clone git@github.com:robwilkerson/dms-distro-menu.git
+ln -s "$(pwd)/dms-distro-menu" \
   ~/.config/DankMaterialShell/plugins/distroMenu
 ```
 
 Then enable it on the bar via Settings → Plugin Management, or add
 `{"id":"distroMenu","enabled":true}` to a bar's widget list in `settings.json`.
 
-Requires the `dgop` binary (ships with DMS) for the About facts.
+## Uninstall
+
+Remove it from the bar in Settings → Plugin Management (or delete its entry from
+the bar's widget list in `settings.json`), then delete the plugin directory:
+
+```sh
+rm -rf ~/.config/DankMaterialShell/plugins/distroMenu
+```
 
 ## Notes
 
