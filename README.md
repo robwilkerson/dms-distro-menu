@@ -41,6 +41,8 @@ Settings → Plugin Management → Distro Menu. One toggle per About field:
 Toggles persist to `~/.config/DankMaterialShell/plugin_settings.json` and the
 dropdown reflects them live.
 
+![The Distro Menu settings panel](docs/settings.png)
+
 ## Install
 
 DMS loads plugins from `~/.config/DankMaterialShell/plugins/`. Either clone this
