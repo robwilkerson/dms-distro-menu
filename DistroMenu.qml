@@ -242,10 +242,21 @@ PluginComponent {
                             delegate: Item {
                                 id: fact
                                 required property var modelData
+                                // Flips true briefly after a click to confirm the
+                                // value reached the clipboard, then resets itself.
+                                property bool copied: false
                                 width: aboutCol.width
                                 height: visible ? factRow.implicitHeight : 0
                                 visible: root.pref(fact.modelData.key, fact.modelData.def)
                                     && fact.modelData.value.length > 0
+
+                                // Subtle hover tint marks the row as clickable.
+                                Rectangle {
+                                    anchors.fill: parent
+                                    radius: Theme.cornerRadius
+                                    color: Theme.surfaceText
+                                    opacity: copyArea.containsMouse ? 0.06 : 0
+                                }
 
                                 Row {
                                     id: factRow
@@ -262,10 +273,30 @@ PluginComponent {
                                     StyledText {
                                         width: parent.width - 62 - Theme.spacingS
                                         elide: Text.ElideRight
-                                        text: fact.modelData.value
+                                        text: fact.copied ? "Copied" : fact.modelData.value
                                         font.pixelSize: Theme.fontSizeSmall
-                                        color: Theme.surfaceVariantText
+                                        color: fact.copied ? Theme.primary : Theme.surfaceVariantText
                                     }
+                                }
+
+                                // Click copies the value alone (no label) to the
+                                // clipboard and leaves the dropdown open.
+                                MouseArea {
+                                    id: copyArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: {
+                                        Quickshell.clipboardText = fact.modelData.value;
+                                        fact.copied = true;
+                                        copyResetTimer.restart();
+                                    }
+                                }
+
+                                Timer {
+                                    id: copyResetTimer
+                                    interval: 1000
+                                    onTriggered: fact.copied = false
                                 }
                             }
                         }
