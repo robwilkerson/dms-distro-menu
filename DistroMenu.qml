@@ -137,6 +137,8 @@ PluginComponent {
                 anchors.centerIn: parent
                 width: root.iconSize
                 height: root.iconSize
+                // Follow the selected theme like the clock/workspace text.
+                colorOverride: Theme.widgetTextColor
             }
         }
     }
