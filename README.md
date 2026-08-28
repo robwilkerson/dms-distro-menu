@@ -25,6 +25,9 @@ Grouped like the Apple menu, separators between clusters:
 - **About this system** — a configurable set of facts (see Settings below).
   Read on demand (`dgop`, `uptime -p`, and a few cheap shell reads) each time the
   dropdown opens, so the plugin carries no `DgopService` ref lifecycle.
+  Click any fact to copy its value to the clipboard — the value alone, without
+  the label. The row briefly reads **Copied** and the dropdown stays open, so
+  you can grab several in a row.
 - **Settings** — opens DMS settings (`dms ipc call settings open`).
 - **Lock** — locks the session (`dms ipc call lock lock`).
 - **Log Out / Restart / Shut Down / Sleep** — power actions via DMS's
